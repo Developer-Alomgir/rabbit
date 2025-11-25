@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>-ALOMGIR HOSSEN — FRONTEND DESIGNER</title>
+  <meta name="description" content="Portfolio inspired by ribbit.dk — animated hero, custom cursor, horizontal projects, scroll-driven scenes." />
+  <style>
+    /* --- Reset & base --- */
+    :root{
+      --bg:#0a0a0a; --muted:#9aa0a6; --accent:#6ee7b7; --glass: rgba(255,255,255,0.04);
+      --ff-sans: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      --ease: cubic-bezier(.22,.9,.28,1);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;}
+    body{
+      margin:0; font-family:var(--ff-sans); background:var(--bg); color:#eaf0f6; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden; 
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* --- Header --- */
+    header{position:fixed;left:0;right:0;top:0;display:flex;align-items:center;justify-content:space-between;padding:22px 48px;z-index:60;backdrop-filter:blur(6px);}
+    .logo{animation:float 6s ease-in-out infinite; font-weight:800;letter-spacing:1px}
+    nav{display:flex;gap:18px;align-items:center}
+    a.navlink{color:var(--muted);text-decoration:none;font-weight:600}
+    .cta{padding:8px 14px;border-radius:999px;background:linear-gradient(90deg,#1f6f5f,#6ee7b7);color:#051014;font-weight:700}
+
+    /* --- Hero --- */
+    .hero{min-height:100vh;display:grid;grid-template-columns:1fr 560px;align-items:center;padding:120px 8vw 80px;gap:40px}
+    .hero-left{max-width:720px}
+    .eyebrow{color:var(--accent);font-weight:700;letter-spacing:1px}
+    h1{font-size: clamp(36px,8vw,96px);margin:10px 0 12px;line-height:1;}
+    h2{font-weight:600;color:var(--muted);font-size:18px;margin:0 0 20px}
+    p.lead{color:var(--muted);max-width:620px}
+    .hero-cta{margin-top:28px}
+
+    /* Visual panel */
+    .hero-right{height:520px;background:linear-gradient(180deg,#0f1720, rgba(0,0,0,0.25));border-radius:18px;position:relative;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.6)}
+    .layer{position:absolute;inset:0}
+    .gloss{position:absolute;inset:0;background:radial-gradient(600px 300px at 10% 10%, rgba(255,255,255,0.03), transparent 20%);pointer-events:none}
+    .mock-canvas{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;color:var(--muted)}
+
+    /* --- Projects horizontal strip --- */
+    .projects-section{padding:120px 6vw;}
+    .projects-wrap{height:360px;position:relative}
+    .projects-track{display:flex;gap:28px;align-items:stretch;height:100%;will-change:transform}
+    .project{min-width:560px;border-radius:14px;background:var(--glass);padding:18px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden}
+    .project .title{font-weight:800;font-size:22px}
+    .project .meta{color:var(--muted);margin-top:6px}
+    .project .thumb{position:absolute;inset:0;background-size:cover;background-position:center;filter:contrast(.95) saturate(.8);opacity:.14}
+
+    /* --- Services / Process / Contact --- */
+    .section{padding:100px 6vw}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px}
+
+    /* --- Footer --- */
+    footer{padding:40px 6vw;color:var(--muted)}
+
+    /* --- Reveal helper classes --- */
+    .reveal{opacity:0;transform:translateY(18px);transition:transform .7s var(--ease),opacity .6s var(--ease)}
+    .reveal.visible{opacity:1;transform:none}
+
+    /* --- Custom cursor --- */
+    .cursor{position:fixed;left:0;top:0;width:36px;height:36px;border-radius:50%;pointer-events:none;transform:translate(-50%,-50%) scale(.6);z-index:999;mix-blend-mode:screen;transition:transform .2s var(--ease),background .25s}
+    .cursor .inner{width:100%;height:100%;border-radius:50%;background:rgba(110,231,183,0.16);display:flex;align-items:center;justify-content:center}
+    .cursor.hover{transform:translate(-50%,-50%) scale(1.6)}
+    .cursor.label{width:120px;height:44px;border-radius:22px;background:rgba(255,255,255,0.04);padding:6px 12px;font-weight:700;font-size:13px}
+
+    /* --- Responsive --- */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr; padding-top:100px}
+      .hero-right{height:360px}
+      .projects-wrap{height:280px}
+      .grid{grid-template-columns:repeat(1,1fr)}
+    }
+  @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-14px)}100%{transform:translateY(0)}}
+    .hero-left h1{animation:float 5s ease-in-out infinite;font-weight:900;letter-spacing:-2px;}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">-ALOMGIR HOSSEN</div>
+  <nav>
+    <a class="navlink" href="#projects">Projects</a>
+    <a class="navlink" href="#about">About</a>
+    <a class="navlink" href="#contact">Contact</a>
+    <a class="cta" href="#contact">Let's talk</a>
+  </nav>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="eyebrow">FRONTEND DESIGNER</div>
+      <h1 class="reveal">-ALOMGIR HOSSEN</h1>
+      <h2 class="reveal">Crafting Pixel-Perfect Coding Experiences.</h2>
+      <p class="lead reveal">Hi, I'm Alomgir. I specialize in React.js, Next.js and creating seamless, responsive web solutions that blend code with creativity. I build animated interfaces and delightful micro-interactions.</p>
+      <div class="hero-cta reveal">
+        <a class="cta" href="#projects">Explore Work</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="layer gloss"></div>
+      <div class="mock-canvas">Hero visual — replace with animated canvas / three.js scene</div>
+    </div>
+  </section>
+
+  <!-- Projects (horizontal) -->
+  <section id="projects" class="projects-section">
+    <h3 class="reveal">Selected Projects</h3>
+    <div class="projects-wrap">
+      <div id="projectsTrack" class="projects-track">
+        <div class="project reveal">
+          <div class="thumb" style="background-image:url('https://picsum.photos/id/1025/1200/800')"></div>
+          <div class="title">Tea Stall</div>
+          <div class="meta">Next.js • Three.js • UI Animation</div>
+        </div>
+        <div class="project reveal">
+          <div class="thumb" style="background-image:url('https://picsum.photos/id/1011/1200/800')"></div>
+          <div class="title">My Builds</div>
+          <div class="meta">React • Tailwind • Motion</div>
+        </div>
+        <div class="project reveal">
+          <div class="thumb" style="background-image:url('https://picsum.photos/id/1043/1200/800')"></div>
+          <div class="title">Acme House</div>
+          <div class="meta">Branding • Interactive</div>
+        </div>
+        <div class="project reveal">
+          <div class="thumb" style="background-image:url('https://picsum.photos/id/1037/1200/800')"></div>
+          <div class="title">Gleam & Grace</div>
+          <div class="meta">Product • Motion</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section" id="about">
+    <h3 class="reveal">What I do</h3>
+    <div class="grid">
+      <div class="card reveal">
+        <h4>Frontend Architecture</h4>
+        <p class="meta">Scalable React & Next.js projects built with performance in mind.</p>
+      </div>
+      <div class="card reveal">
+        <h4>Motion & Interaction</h4>
+        <p class="meta">Micro-interactions, scroll-scrub timelines, Three.js hero scenes.</p>
+      </div>
+      <div class="card reveal">
+        <h4>Design Systems</h4>
+        <p class="meta">Accessible, themeable, and consistent component libraries.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <h3 class="reveal">Let’s Connect</h3>
+    <p class="reveal">I am actively seeking challenging full-time roles or freelance projects. Send me a message and let's discuss your next great idea.</p>
+    <form class="card" style="max-width:640px;margin-top:18px;" onsubmit="event.preventDefault();alert('Send via real backend');">
+      <label style="display:block;margin-bottom:8px">Your email<input required type="email" style="width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit"></label>
+      <label style="display:block;margin-bottom:8px">Message<textarea required rows="5" style="width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit"></textarea></label>
+      <div style="margin-top:12px"><button class="cta" type="submit">Send</button></div>
+    </form>
+  </section>
+
+</main>
+
+<footer>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap">
+    <div>© <strong>-ALOMGIR HOSSEN</strong> — FRONTEND DESIGNER</div>
+    <div style="color:var(--muted)">Built with care • Inspired by ribbit.dk</div>
+  </div>
+</footer>
+
+<!-- Custom cursor element -->
+<div id="cursor" class="cursor"><div class="inner"></div></div>
+
+<script>
+  // --- Smooth reveal on intersection ---
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('visible'); }
+    });
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(n=>io.observe(n));
+
+  // --- Custom cursor ---
+  const cursor = document.getElementById('cursor');
+  let cx = window.innerWidth/2, cy = window.innerHeight/2;
+  let tx = cx, ty = cy;
+  document.addEventListener('pointermove', (ev)=>{
+    tx = ev.clientX; ty = ev.clientY; cursor.style.display='block';
+  });
+  // lerp loop
+  function raf(){ cx += (tx-cx)*0.18; cy += (ty-cy)*0.18; cursor.style.left = cx+'px'; cursor.style.top = cy+'px'; requestAnimationFrame(raf); }
+  raf();
+  // hover states
+  document.querySelectorAll('a,button,.project').forEach(el=>{
+    el.addEventListener('pointerenter', ()=> cursor.classList.add('hover'));
+    el.addEventListener('pointerleave', ()=> cursor.classList.remove('hover'));
+  });
+
+  // --- Horizontal scroll mapping: vertical -> horizontal ---
+  const track = document.getElementById('projectsTrack');
+  const projectsWrap = document.querySelector('.projects-wrap');
+  let maxScroll;
+  function updateSizes(){
+    // how far we can translate track
+    const trackW = track.scrollWidth;
+    const viewW = projectsWrap.clientWidth;
+    maxScroll = trackW - viewW;
+  }
+  updateSizes(); window.addEventListener('resize', updateSizes);
+
+  // when projects section is in view, map vertical scroll to track transform
+  const projectsSection = document.querySelector('.projects-section');
+  const psTop = () => projectsSection.getBoundingClientRect().top + window.scrollY;
+  window.addEventListener('scroll', ()=>{
+    const start = psTop() - window.innerHeight/2;
+    const end = start + window.innerHeight + projectsWrap.clientHeight;
+    const y = window.scrollY;
+    if(y >= start && y <= end){
+      const t = (y-start)/(end-start);
+      const x = Math.min(Math.max(t,0),1) * maxScroll;
+      track.style.transform = `translateX(-${x}px)`;
+    }
+  },{passive:true});
+
+  // --- Simple parallax for hero layers (mouse-based) ---
+  const hero = document.querySelector('.hero-right');
+  hero.addEventListener('pointermove', (e)=>{
+    const r = hero.getBoundingClientRect();
+    const px = (e.clientX - r.left)/r.width - 0.5;
+    const py = (e.clientY - r.top)/r.height - 0.5;
+    hero.querySelector('.mock-canvas').style.transform = `translate(${px*10}px, ${py*8}px) scale(1.02)`;
+  });
+
+  // --- Accessibility: respect reduced motion ---
+  const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if(mq.matches){
+    document.querySelectorAll('.reveal').forEach(n=>{n.style.transition='none'; n.classList.add('visible')});
+    cursor.style.display='none';
+  }
+
+</script>
+</body>
+</html>
