@@ -239,7 +239,7 @@
     if(y >= start && y <= end){
       const t = (y-start)/(end-start);
       const x = Math.min(Math.max(t,0),1) * maxScroll;
-      track.style.transform = `translateX(${x}px)`;
+      track.style.transform = `translateX(-${x}px)`;
     }
   },{passive:true});
 
@@ -251,23 +251,6 @@
     const py = (e.clientY - r.top)/r.height - 0.5;
     hero.querySelector('.mock-canvas').style.transform = `translate(${px*10}px, ${py*8}px) scale(1.02)`;
   });
-
-  // --- Touch-drag horizontal scroll (mobile) ---
-  let touchStartX = 0, trackX = 0;
-  projectsWrap.addEventListener('touchstart', e=>{
-    touchStartX = e.touches[0].clientX;
-    const m = /translateX\(([-0-9.]+)px/.exec(track.style.transform);
-    trackX = m ? parseFloat(m[1]) : 0;
-  });
-  projectsWrap.addEventListener('touchmove', e=>{
-    const dx = e.touches[0].clientX - touchStartX;
-    let nx = trackX + dx;
-    nx = Math.min(Math.max(nx, -maxScroll), 0);
-    track.style.transform = `translateX(${nx}px)`;
-  });
-
-  // Disable custom cursor on mobile
-  if(window.innerWidth < 900){ cursor.style.display='none'; }
 
   // --- Accessibility: respect reduced motion ---
   const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
