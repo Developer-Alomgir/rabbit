@@ -76,7 +76,7 @@
       .projects-wrap{height:280px}
       .grid{grid-template-columns:repeat(1,1fr)}
     }
-  @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-14px)}100%{transform:translateY(0)}}
+  @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(14px)}100%{transform:translateY(0)}}
     .hero-left h1{animation:float 5s ease-in-out infinite;font-weight:900;letter-spacing:-2px;}
     .stretch{display:inline-block;animation:stretch 6s var(--ease) infinite;transform-origin:left center;}
   @keyframes stretch{0%{letter-spacing:-2px;transform:scaleX(1);}40%{letter-spacing:-6px;transform:scaleX(1.3);}70%{letter-spacing:-2px;transform:scaleX(1);}100%{letter-spacing:-2px;transform:scaleX(1);}}
@@ -136,6 +136,15 @@
           <div class="thumb" style="background-image:url('https://picsum.photos/id/1037/1200/800')"></div>
           <div class="title">Gleam & Grace</div>
           <div class="meta">Product • Motion</div>
+                <div class="project reveal">
+          <div class="thumb" style="background-image:url('https://picsum.photos/id/1050/1200/800')"></div>
+          <div class="title">Skyline Vision</div>
+          <div class="meta">Creative • Motion</div>
+        </div>
+        <div class="project reveal">
+          <div class="thumb" style="background-image:url('https://picsum.photos/id/1060/1200/800')"></div>
+          <div class="title">Nova Studio</div>
+          <div class="meta">Interactive • UI/UX</div>
         </div>
       </div>
     </div>
@@ -230,7 +239,7 @@
     if(y >= start && y <= end){
       const t = (y-start)/(end-start);
       const x = Math.min(Math.max(t,0),1) * maxScroll;
-      track.style.transform = `translateX(-${x}px)`;
+      track.style.transform = `translateX(${x}px)`;
     }
   },{passive:true});
 
@@ -242,6 +251,23 @@
     const py = (e.clientY - r.top)/r.height - 0.5;
     hero.querySelector('.mock-canvas').style.transform = `translate(${px*10}px, ${py*8}px) scale(1.02)`;
   });
+
+  // --- Touch-drag horizontal scroll (mobile) ---
+  let touchStartX = 0, trackX = 0;
+  projectsWrap.addEventListener('touchstart', e=>{
+    touchStartX = e.touches[0].clientX;
+    const m = /translateX\(([-0-9.]+)px/.exec(track.style.transform);
+    trackX = m ? parseFloat(m[1]) : 0;
+  });
+  projectsWrap.addEventListener('touchmove', e=>{
+    const dx = e.touches[0].clientX - touchStartX;
+    let nx = trackX + dx;
+    nx = Math.min(Math.max(nx, -maxScroll), 0);
+    track.style.transform = `translateX(${nx}px)`;
+  });
+
+  // Disable custom cursor on mobile
+  if(window.innerWidth < 900){ cursor.style.display='none'; }
 
   // --- Accessibility: respect reduced motion ---
   const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
