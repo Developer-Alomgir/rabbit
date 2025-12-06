@@ -44,7 +44,7 @@
 
     /* --- Projects horizontal strip --- */
     .projects-section{padding:120px 6vw;}
-    .projects-wrap{height:360px;position:relative}
+    .projects-wrap{height:660px;position:relative}
     .projects-track{display:flex;flex-wrap:wrap;gap:28px;align-items:stretch;height:auto;will-change:transform}
     .project{min-width:560px;border-radius:14px;background:var(--glass);padding:18px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden}
     .project .title{font-weight:1800;font-size:220px}
@@ -238,7 +238,7 @@
     const y = window.scrollY;
     if(y >= start && y <= end){
       const t = (y-start)/(end-start);
-      const x = Math.min(Math.max(t,0),1) * maxScroll;
+      const x = Math.min(Math.max(t,0),3) * maxScroll;
       track.style.transform = `translateX(-${x}px)`;
     }
   },{passive:true});
